@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eat Fart</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Comic Sans MS, cursive, sans-serif;
+      background: linear-gradient(45deg, #ff69b4, #ffa500, #ffff00);
+      background-size: 600% 600%;
+      animation: chaos 10s infinite;
+      text-align: center;
+      color: #222;
+      overflow-x: hidden;
+    }
+
+    @keyframes chaos {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    @keyframes eatAnimation {
+      0% {transform: translateY(0) scale(1); opacity: 0;}
+      50% {transform: translateY(-30px) scale(1.2); opacity: 1;}
+      100% {transform: translateY(0) scale(1); opacity: 0;}
+    }
+
+    @keyframes emojiFall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    .container {
+      padding: 100px 20px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px #fff;
+    }
+
+    .fart-button {
+      font-size: 2rem;
+      padding: 20px 40px;
+      background-color: #ff1493;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 20px #ff1493;
+      transition: 0.2s;
+    }
+
+    .fart-button:hover {
+      transform: scale(1.1);
+    }
+
+    .message {
+      font-size: 1.5rem;
+      margin-top: 40px;
+    }
+
+    .boy {
+      width: 200px;
+      height: auto;
+      margin: 40px auto 0;
+      opacity: 0;
+      transform: scale(0.5);
+    }
+
+    .boy.animate {
+      animation: eatAnimation 1.5s ease-in-out;
+    }
+
+    .counter {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 2rem;
+      animation: emojiFall 2s linear forwards;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to EatFart.com</h1>
+    <button class="fart-button" onclick="eatFart()">EAT FART</button>
+    <p class="message" id="msg">Click the button above to start your fart journey 💨</p>
+    <p class="counter" id="counter">Total farts eaten: 0</p>
+    <img id="boy" src="https://i.postimg.cc/xTRb76Pk/boy-eating.png" alt="Boy eating fart" class="boy">
+  </div>
+
+  <audio id="fartSound" src="https://www.soundjay.com/human/fart-01.mp3"></audio>
+
+  <script>
+    const messages = [
+      "You’ve eaten 1 fart. Try another!",
+      "That was spicy...",
+      "💨 + 🧠 = genius?",
+      "You are now 12% fart.",
+      "FDA warning: excessive fart consumption may cause laughter."
+    ];
+
+    let fartCount = 0;
+
+    function eatFart() {
+      const sound = document.getElementById('fartSound');
+      const msg = document.getElementById('msg');
+      const boy = document.getElementById('boy');
+      const counter = document.getElementById('counter');
+
+      sound.play();
+      const random = messages[Math.floor(Math.random() * messages.length)];
+      msg.textContent = random;
+
+      // Animate background
+      document.body.style.animation = 'none';
+      void document.body.offsetWidth;
+      document.body.style.animation = 'chaos 0.5s';
+
+      // Animate boy eating
+      boy.classList.remove('animate');
+      void boy.offsetWidth;
+      boy.classList.add('animate');
+
+      // Update counter
+      fartCount++;
+      counter.textContent = `Total farts eaten: ${fartCount}`;
+
+      // Spawn emoji
+      const emojiList = ['💨', '💩', '🪠'];
+      for (let i = 0; i < 7; i++) {
+        const emoji = document.createElement('div');
+        emoji.className = 'emoji';
+        emoji.textContent = emojiList[Math.floor(Math.random() * emojiList.length)];
+        emoji.style.left = Math.random() * 100 + 'vw';
+        emoji.style.top = '-2rem';
+        document.body.appendChild(emoji);
+
+        setTimeout(() => emoji.remove(), 2000);
+      }
+    }
+  </script>
+</body>
+</html>
