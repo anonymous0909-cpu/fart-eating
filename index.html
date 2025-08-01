@@ -98,6 +98,7 @@
     <p class="message" id="msg">Click the button above to start your fart journey 💨</p>
     <p class="counter" id="counter">Total farts eaten: 0</p>
     <img id="boy" src="https://i.postimg.cc/xTRb76Pk/boy-eating.png" alt="Boy eating fart" class="boy">
+    <p class="message" id="reaction"></p>
   </div>
 
   <audio id="fartSound" src="https://www.soundjay.com/human/fart-01.mp3"></audio>
@@ -118,6 +119,7 @@
       const msg = document.getElementById('msg');
       const boy = document.getElementById('boy');
       const counter = document.getElementById('counter');
+      const reaction = document.getElementById('reaction');
 
       sound.play();
       const random = messages[Math.floor(Math.random() * messages.length)];
@@ -136,6 +138,9 @@
       // Update counter
       fartCount++;
       counter.textContent = `Total farts eaten: ${fartCount}`;
+
+      // Display reaction
+      reaction.textContent = 'Tanisha eated fart and some lenda very big';
 
       // Spawn emoji
       const emojiList = ['💨', '💩', '🪠'];
